@@ -39,26 +39,26 @@ If you haven't done so, make sure you know your organization name and your appli
 Within your organization, you can have multiple application namespaces.  By default, an application named "Sandbox" has been created for you to use for testing, but you can also log into the [Admin Portal](http://apigee.com/usergrid) and create an application with any name you want.
 
 Once you have your application name, you will want to create a UGClient object like so: 
+```objc
+//configure the org and app
+NSString * orgName = @"ApigeeOrg";
+NSString * appName = @"MessageeApp";
 
-	//configure the org and app
-	NSString * orgName = @"ApigeeOrg";
-	NSString * appName = @"MessageeApp";
-
-	//make new client
-	usergridClient = [[UGClient alloc]initWithOrganizationId: orgName withApplicationID: appName];
-
+//make new client
+usergridClient = [[UGClient alloc]initWithOrganizationId: orgName withApplicationID: appName];
+```
 Now use the usergridClient object to invoke other methods that access the API.  For example, to log a user in:
-
-	[usergridClient logInUser:username password:password];
-	UGUser *user = [usergridClient getLoggedInUser];
-
+```objc
+[usergridClient logInUser:username password:password];
+UGUser *user = [usergridClient getLoggedInUser];
+```
 Or, to create a user:
-
-	UGClientResponse *response = [usergridClient addUser:@"myusername" email:@"email@email.com" name:@"my name" password:@"mypassword"];
-    if (response.transactionState == 0) {
-    	//user created!
-    } 
-
+```objc
+UGClientResponse *response = [usergridClient addUser:@"myusername" email:@"email@email.com" name:@"my name" password:@"mypassword"];
+if (response.transactionState == 0) {
+	//user created!
+}
+```
 
 ##Sample Code
 If you are ready to look at a fully functional app that uses this SDK, check out our Messagee application.  It is a twitter-type app that exercises many parts of the API including: Login / Authentication, GET and POST operations, activities (tweets), and social features such as following relationships. 
